@@ -29,3 +29,6 @@ yarn-error.log*
 
 # Nitro
 .nitro/
+
+.vercel
+.claude/settings.local.json

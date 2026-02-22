@@ -71,12 +71,12 @@ npm run dev
 npm run dev
 ```
 
-Your MCP endpoint is now live at **`http://localhost:3000/mcp`**.
+Your MCP endpoint is now live at **`https://clerk-mcp.vercel.app/mcp`**.
 
 ### 3. Verify
 
 ```bash
-curl http://localhost:3000/api/health
+curl https://clerk-mcp.vercel.app/api/health
 ```
 
 - **Hosted mode**: `{"status":"ok","mode":"hosted","clerkConnected":true}`
@@ -91,7 +91,7 @@ curl http://localhost:3000/api/health
 **Hosted mode:**
 
 ```bash
-claude mcp add --transport http clerk http://localhost:3000/mcp
+claude mcp add --transport http clerk https://clerk-mcp.vercel.app/mcp
 ```
 
 **Public mode:**
@@ -99,7 +99,7 @@ claude mcp add --transport http clerk http://localhost:3000/mcp
 ```bash
 claude mcp add --transport http \
   --header "X-Clerk-Secret-Key: sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
-  clerk http://localhost:3000/mcp
+  clerk https://clerk-mcp.vercel.app/mcp
 ```
 
 ### Claude Desktop
@@ -113,7 +113,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   "mcpServers": {
     "clerk": {
       "command": "npx",
-      "args": ["mcp-remote", "http://localhost:3000/mcp"]
+      "args": ["mcp-remote", "https://clerk-mcp.vercel.app/mcp"]
     }
   }
 }
@@ -128,7 +128,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
       "command": "npx",
       "args": [
         "mcp-remote",
-        "http://localhost:3000/mcp",
+        "https://clerk-mcp.vercel.app/mcp",
         "--header",
         "X-Clerk-Secret-Key: sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       ]
@@ -147,7 +147,7 @@ Go to **Settings → MCP → Add Server**:
 {
   "mcpServers": {
     "clerk": {
-      "url": "http://localhost:3000/mcp"
+      "url": "https://clerk-mcp.vercel.app/mcp"
     }
   }
 }
@@ -159,7 +159,7 @@ Go to **Settings → MCP → Add Server**:
 {
   "mcpServers": {
     "clerk": {
-      "url": "http://localhost:3000/mcp",
+      "url": "https://clerk-mcp.vercel.app/mcp",
       "headers": {
         "X-Clerk-Secret-Key": "sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       }
@@ -179,7 +179,7 @@ Add to your workspace `.vscode/mcp.json`:
   "mcp": {
     "servers": {
       "clerk": {
-        "url": "http://localhost:3000/mcp"
+        "url": "https://clerk-mcp.vercel.app/mcp"
       }
     }
   }
@@ -193,7 +193,7 @@ Add to your workspace `.vscode/mcp.json`:
   "mcp": {
     "servers": {
       "clerk": {
-        "url": "http://localhost:3000/mcp",
+        "url": "https://clerk-mcp.vercel.app/mcp",
         "headers": {
           "X-Clerk-Secret-Key": "sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         }
@@ -215,7 +215,7 @@ Add to MCP settings:
     "clerk": {
       "source": "custom",
       "command": "npx",
-      "args": ["mcp-remote", "http://localhost:3000/mcp"],
+      "args": ["mcp-remote", "https://clerk-mcp.vercel.app/mcp"],
       "env": {}
     }
   }
@@ -232,7 +232,7 @@ Add to MCP settings:
       "command": "npx",
       "args": [
         "mcp-remote",
-        "http://localhost:3000/mcp",
+        "https://clerk-mcp.vercel.app/mcp",
         "--header",
         "X-Clerk-Secret-Key: sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       ],
@@ -347,7 +347,7 @@ docker build -t clerk-mcp .
 docker run -p 3000:3000 -e CLERK_SECRET_KEY=sk_live_xxx clerk-mcp
 ```
 
-After deploying, replace `http://localhost:3000/mcp` with your production URL in all client configs.
+If you self-host, use your own deployment URL instead of `https://clerk-mcp.vercel.app` in the client configs above.
 
 Compatible with: **Vercel**, **Netlify**, **Cloudflare Workers** (with nitro preset), **Railway**, **Fly.io**, or any Node.js host.
 
