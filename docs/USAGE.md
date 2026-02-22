@@ -14,7 +14,7 @@ The server owns the Clerk secret key. You set `CLERK_SECRET_KEY` in the `.env` f
 
 ```bash
 # .env
-CLERK_SECRET_KEY=sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CLERK_SECRET_KEY=<YOUR_CLERK_SECRET_KEY>
 ```
 
 ```bash
@@ -36,7 +36,7 @@ npm run dev
 Clients must pass the header:
 
 ```
-X-Clerk-Secret-Key: sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+X-Clerk-Secret-Key: <YOUR_CLERK_SECRET_KEY>
 ```
 
 The mode is **auto-detected**: if `CLERK_SECRET_KEY` is set in the environment, it runs in hosted mode. If not, it runs in public mode.
@@ -73,7 +73,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
         "mcp-remote",
         "http://localhost:3000/mcp",
         "--header",
-        "X-Clerk-Secret-Key: sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        "X-Clerk-Secret-Key: <YOUR_CLERK_SECRET_KEY>"
       ]
     }
   }
@@ -92,7 +92,7 @@ claude mcp add --transport http clerk http://localhost:3000/mcp
 
 ```bash
 claude mcp add --transport http \
-  --header "X-Clerk-Secret-Key: sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  --header "X-Clerk-Secret-Key: <YOUR_CLERK_SECRET_KEY>" \
   clerk http://localhost:3000/mcp
 ```
 
@@ -120,7 +120,7 @@ Go to **Settings → MCP → Add Server**:
     "clerk": {
       "url": "http://localhost:3000/mcp",
       "headers": {
-        "X-Clerk-Secret-Key": "sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        "X-Clerk-Secret-Key": "<YOUR_CLERK_SECRET_KEY>"
       }
     }
   }
@@ -154,7 +154,7 @@ Add to `.vscode/mcp.json` in your workspace:
       "clerk": {
         "url": "http://localhost:3000/mcp",
         "headers": {
-          "X-Clerk-Secret-Key": "sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          "X-Clerk-Secret-Key": "<YOUR_CLERK_SECRET_KEY>"
         }
       }
     }
