@@ -1,6 +1,6 @@
 # Clerk MCP Server
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server for [Clerk](https://clerk.com), built with **Nuxt** and the **@nuxtjs/mcp-toolkit**.
+A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server for [Clerk](https://clerk.com)
 
 Query and manage your Clerk organizations, members, users, roles, and metadata directly from AI assistants like Claude, Cursor, VS Code Copilot, Windsurf, and more.
 
@@ -35,12 +35,12 @@ No secret key on the server. Each client passes their own key via the `X-Clerk-S
 
 **Best for:** Shared deployments, multi-tenant setups, or when you don't want the key stored on the server.
 
-| | Hosted Mode | Public Mode |
-|---|---|---|
-| Key stored on server | Yes (in `.env`) | No |
-| Key sent per request | No | Yes (via header) |
-| Setup complexity | Simpler | Slightly more config |
-| Multi-user support | Single Clerk account | Multiple Clerk accounts |
+|                      | Hosted Mode          | Public Mode             |
+| -------------------- | -------------------- | ----------------------- |
+| Key stored on server | Yes (in `.env`)      | No                      |
+| Key sent per request | No                   | Yes (via header)        |
+| Setup complexity     | Simpler              | Slightly more config    |
+| Multi-user support   | Single Clerk account | Multiple Clerk accounts |
 
 ---
 
@@ -282,37 +282,37 @@ docker compose up clerk-mcp-public
 
 ### Organizations
 
-| Tool | Description |
-|------|-------------|
-| `clerk_list_organizations` | List orgs with filtering by name/slug, pagination, and member counts |
-| `clerk_get_organization` | Get org details by ID or slug (includes metadata, timestamps) |
-| `clerk_create_organization` | Create a new organization with name, slug, and metadata |
-| `clerk_update_organization_metadata` | Update org public/private metadata |
-| `clerk_delete_organization` | Delete an organization permanently (irreversible) |
+| Tool                                 | Description                                                          |
+| ------------------------------------ | -------------------------------------------------------------------- |
+| `clerk_list_organizations`           | List orgs with filtering by name/slug, pagination, and member counts |
+| `clerk_get_organization`             | Get org details by ID or slug (includes metadata, timestamps)        |
+| `clerk_create_organization`          | Create a new organization with name, slug, and metadata              |
+| `clerk_update_organization_metadata` | Update org public/private metadata                                   |
+| `clerk_delete_organization`          | Delete an organization permanently (irreversible)                    |
 
 ### Members
 
-| Tool | Description |
-|------|-------------|
-| `clerk_list_organization_members` | List org members with roles, user data, and metadata |
-| `clerk_update_member_role` | Change a member's role (e.g. `org:admin`, `org:member`) |
-| `clerk_update_member_metadata` | Update membership public/private metadata |
-| `clerk_remove_member` | Remove a member from an organization |
+| Tool                              | Description                                             |
+| --------------------------------- | ------------------------------------------------------- |
+| `clerk_list_organization_members` | List org members with roles, user data, and metadata    |
+| `clerk_update_member_role`        | Change a member's role (e.g. `org:admin`, `org:member`) |
+| `clerk_update_member_metadata`    | Update membership public/private metadata               |
+| `clerk_remove_member`             | Remove a member from an organization                    |
 
 ### Invitations
 
-| Tool | Description |
-|------|-------------|
+| Tool                                  | Description                                           |
+| ------------------------------------- | ----------------------------------------------------- |
 | `clerk_list_organization_invitations` | List invitations by status (pending/accepted/revoked) |
-| `clerk_create_invitation` | Invite a user to an org by email |
+| `clerk_create_invitation`             | Invite a user to an org by email                      |
 
 ### Users
 
-| Tool | Description |
-|------|-------------|
-| `clerk_list_users` | List all instance users with search by name/email/phone |
-| `clerk_get_user` | Get full user profile: emails, phones, external accounts, metadata |
-| `clerk_update_user_metadata` | Update user public/private/unsafe metadata |
+| Tool                         | Description                                                        |
+| ---------------------------- | ------------------------------------------------------------------ |
+| `clerk_list_users`           | List all instance users with search by name/email/phone            |
+| `clerk_get_user`             | Get full user profile: emails, phones, external accounts, metadata |
+| `clerk_update_user_metadata` | Update user public/private/unsafe metadata                         |
 
 ---
 
@@ -353,54 +353,19 @@ Compatible with: **Vercel**, **Netlify**, **Cloudflare Workers** (with nitro pre
 
 ---
 
-## Project Structure
-
-```
-Clerk-MCP/
-├── server/
-│   ├── middleware/
-│   │   └── clerk-key.ts                    # Extracts X-Clerk-Secret-Key header (public mode)
-│   ├── mcp/
-│   │   └── tools/                          # MCP tools (auto-discovered)
-│   │       ├── clerk-list-organizations.ts
-│   │       ├── clerk-get-organization.ts
-│   │       ├── clerk-create-organization.ts
-│   │       ├── clerk-update-organization-metadata.ts
-│   │       ├── clerk-list-organization-members.ts
-│   │       ├── clerk-update-member-role.ts
-│   │       ├── clerk-update-member-metadata.ts
-│   │       ├── clerk-list-organization-invitations.ts
-│   │       ├── clerk-create-invitation.ts
-│   │       ├── clerk-delete-organization.ts
-│   │       ├── clerk-remove-member.ts
-│   │       ├── clerk-list-users.ts
-│   │       ├── clerk-get-user.ts
-│   │       └── clerk-update-user-metadata.ts
-│   ├── api/
-│   │   └── health.get.ts                   # GET /api/health — readiness probe
-│   └── utils/
-│       └── clerk.ts                        # Clerk client (dual-mode) + helpers
-├── app.vue                                 # Landing page
-├── nuxt.config.ts
-├── Dockerfile
-├── docker-compose.yml
-├── package.json
-└── .env.example
-```
-
 ## Adding New Tools
 
 Create a new file in `server/mcp/tools/` — it's automatically discovered by the MCP toolkit:
 
 ```typescript
 // server/mcp/tools/clerk-my-new-tool.ts
-import { z } from 'zod'
+import { z } from "zod";
 
 export default defineMcpTool({
-  name: 'clerk_my_new_tool',
-  description: 'Description of what this tool does',
+  name: "clerk_my_new_tool",
+  description: "Description of what this tool does",
   inputSchema: {
-    param: z.string().describe('Parameter description'),
+    param: z.string().describe("Parameter description"),
   },
   annotations: {
     readOnlyHint: true,
@@ -408,16 +373,16 @@ export default defineMcpTool({
     openWorldHint: true,
   },
   async handler({ param }) {
-    const clerk = useClerkClient()
-    const result = await clerkCall(() => clerk.someApi.someMethod({ param }))
-    return jsonResult(result)
+    const clerk = useClerkClient();
+    const result = await clerkCall(() => clerk.someApi.someMethod({ param }));
+    return jsonResult(result);
   },
-})
+});
 ```
 
 ## Tech Stack
 
-- [Nuxt 3](https://nuxt.com) — Full-stack Vue framework
+- [Nuxt 4](https://nuxt.com) — Full-stack Vue framework
 - [@nuxtjs/mcp-toolkit](https://mcp-toolkit.nuxt.dev) — MCP server module for Nuxt
 - [@clerk/backend](https://clerk.com/docs/reference/backend/overview) — Clerk Backend SDK
 - [Zod](https://zod.dev) — Schema validation
